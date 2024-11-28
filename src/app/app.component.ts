@@ -9,7 +9,13 @@ import { FooterComponent } from "./shared/footer/footer.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoginComponent, RegisterComponent, NavbarComponent, SidebarComponent, FooterComponent],
+  imports: [
+    RouterOutlet,
+    LoginComponent,
+    RegisterComponent,
+    NavbarComponent,
+    SidebarComponent,
+    FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
