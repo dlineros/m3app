@@ -12,6 +12,7 @@ export class AuthService {
 
   // Método para iniciar sesión
   loginUsuario(correo: string, password: string) {
+    console.log(this.auth);
     return signInWithEmailAndPassword(this.auth, correo, password);
   }
 

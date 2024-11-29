@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { AuthService } from '../../services/auth.service';
 import { dashboardRoutes } from '../../dashboard/dashboard.routes';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -56,7 +57,16 @@ export class RegisterComponent implements OnInit {
     .then(credenciales => {
       console.log(credenciales);
       this.router.navigate(['/']);
-    });
+    })
+    .catch(err=>
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: err.message,
+        //footer: '<a href="#">Why do I have this issue?</a>'
+      })
+    )
+
   }
 
 }
