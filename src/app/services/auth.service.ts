@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { Auth, authState, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { inject } from '@angular/core';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root', // Este servicio estará disponible de forma global
 })
 export class AuthService {
   private auth = inject(Auth);
+  user$: Observable<any> | undefined;
 
   constructor() {}
 
@@ -26,4 +29,15 @@ export class AuthService {
   logout() {
     return signOut(this.auth);
   }
+
+  initAuthListener(){
+
+    this.user$ = authState(this.auth); // authState devuelve un Observable con el estado del usuario
+    this.user$?.subscribe(fuser=>{
+      console.log(fuser);
+      console.log(fuser?.email);
+    })
+
+  }
+
 }
