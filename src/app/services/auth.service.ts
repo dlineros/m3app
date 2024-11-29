@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth, authState, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 
 
 @Injectable({
@@ -11,7 +11,7 @@ export class AuthService {
   private auth = inject(Auth);
   user$: Observable<any> | undefined;
 
-  constructor() {}
+  constructor() { }
 
   // Método para iniciar sesión
   loginUsuario(correo: string, password: string) {
@@ -20,7 +20,7 @@ export class AuthService {
   }
 
   // Método para registrarse
-  crearUsuario(nombre: string, paterno:string, materno:string,correo: string, password: string) {
+  crearUsuario(nombre: string, paterno: string, materno: string, correo: string, password: string) {
     //console.log(this.auth);
     return createUserWithEmailAndPassword(this.auth, correo, password);
   }
@@ -30,14 +30,19 @@ export class AuthService {
     return signOut(this.auth);
   }
 
-  initAuthListener(){
+  initAuthListener() {
 
     this.user$ = authState(this.auth); // authState devuelve un Observable con el estado del usuario
-    this.user$?.subscribe(fuser=>{
+    this.user$?.subscribe(fuser => {
       console.log(fuser);
       console.log(fuser?.email);
     })
+    }
 
-  }
+    isAuth(){
+      return this.user$?.pipe(
+        map(fbuser=>fbuser!=null)
+      ) ?? of(false)
+    }
 
 }
