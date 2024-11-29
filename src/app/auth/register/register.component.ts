@@ -54,15 +54,15 @@ export class RegisterComponent implements OnInit {
     const { nombre, paterno, materno, correo, password } = this.registroForm.value;
 
     this.authService.crearUsuario(nombre, paterno, materno, correo, password)
-    .then(credenciales => {
+    .then(credenciales=>{
       console.log(credenciales);
       this.router.navigate(['/']);
     })
-    .catch(err=>
+    .catch(error=>
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: err.message,
+        text: error.message,
         //footer: '<a href="#">Why do I have this issue?</a>'
       })
     )
