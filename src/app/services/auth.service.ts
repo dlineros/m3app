@@ -11,13 +11,13 @@ export class AuthService {
   constructor() {}
 
   // Método para iniciar sesión
-  login(email: string, password: string) {
-    return signInWithEmailAndPassword(this.auth, email, password);
+  loginUsuario(correo: string, password: string) {
+    return signInWithEmailAndPassword(this.auth, correo, password);
   }
 
   // Método para registrarse
   crearUsuario(nombre: string, paterno:string, materno:string,correo: string, password: string) {
-    console.log(this.auth);
+    //console.log(this.auth);
     return createUserWithEmailAndPassword(this.auth, correo, password);
   }
 

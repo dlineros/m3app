@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { AuthService } from '../../services/auth.service';
+import { dashboardRoutes } from '../../dashboard/dashboard.routes';
 
 
 @Component({
@@ -24,13 +25,18 @@ export class RegisterComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router:Router
+
+  ) {
 
   }
 
   ngOnInit() {
 
-    this, this.registroForm = this.fb.group({
+      this.registroForm = this.fb.group({
       nombre: ['', Validators.required],
       paterno: ['', Validators.required],
       materno: ['', Validators.required],
@@ -46,7 +52,11 @@ export class RegisterComponent implements OnInit {
 
     const { nombre, paterno, materno, correo, password } = this.registroForm.value;
 
-    this.authService.crearUsuario(nombre, paterno, materno, correo, password);
+    this.authService.crearUsuario(nombre, paterno, materno, correo, password)
+    .then(credenciales => {
+      console.log(credenciales);
+      this.router.navigate(['/']);
+    });
   }
 
 }
