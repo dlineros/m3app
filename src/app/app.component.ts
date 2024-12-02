@@ -11,6 +11,9 @@ import { FooterComponent } from "./shared/footer/footer.component";
 import {ReactiveFormsModule} from '@angular/forms';
 import { AuthService } from './services/auth.service';
 
+
+
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -21,7 +24,8 @@ import { AuthService } from './services/auth.service';
     NavbarComponent,
     SidebarComponent,
     FooterComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
